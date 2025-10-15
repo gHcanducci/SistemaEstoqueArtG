@@ -1,0 +1,29 @@
+﻿<Window x:Class="SistemaEstoque.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SistemaEstoque"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#FFECECEC">
+        <GroupBox Header="Relatórios&#xD;&#xA;" Margin="590,44,0,0"/>
+        <Rectangle HorizontalAlignment="Center" Height="45" Margin="0,-1,0,0" Stroke="Black" VerticalAlignment="Top" Width="800" Fill="#FF011945"/>
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="127,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="451" UseLayoutRounding="False"/>
+        <Label Content="Pesquisa Rápida" HorizontalAlignment="Left" Height="25" Margin="10,56,0,0" VerticalAlignment="Top" Width="112" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <GroupBox HorizontalAlignment="Left" Height="129" Header="Métodos&#xD;&#xA;" Margin="0,305,0,0" VerticalAlignment="Top" Width="590"/>
+        <GroupBox HorizontalAlignment="Left" Height="204" Header="Pré-Visualização&#xD;&#xA;" Margin="0,101,0,0" VerticalAlignment="Top" Width="590"/>
+        <Image  HorizontalAlignment="Left" Height="42" Margin="20,0,0,0" VerticalAlignment="Top" Width="72" Source="/LogoArtG.jpeg"/>
+        <!--
+        <Label Content="Nome" HorizontalAlignment="Left" Height="27" Margin="27,32,0,0" VerticalAlignment="Top" Width="86" FontWeight="Bold"/>
+        <Label Content="Email" HorizontalAlignment="Left" Height="27" Margin="27,87,0,0" VerticalAlignment="Top" Width="86" FontWeight="Bold"/>
+        <Label Content="Senha" HorizontalAlignment="Left" Height="27" Margin="27,149,0,0" VerticalAlignment="Top" Width="86" FontWeight="Bold" Background="{x:Null}"/>
+        <TextBox HorizontalAlignment="Left" Height="28" Margin="27,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="511" FontWeight="Light" FontStyle="Oblique" Background="White"/>
+        <TextBox HorizontalAlignment="Left" Height="28" Margin="27,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="511" FontWeight="Light" FontStyle="Oblique" />
+        <TextBox HorizontalAlignment="Left" Height="28" Margin="27,170,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="511" FontWeight="Light" FontStyle="Oblique" Background="White"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="24" Margin="32,252,0,0" VerticalAlignment="Top" Width="110" Background="#FF2936FF" Foreground="Black"/>
+        -->
+
+
+    </Grid>
+</Window>
