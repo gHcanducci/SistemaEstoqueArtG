@@ -24,5 +24,20 @@ namespace SistemaEstoque
         {
             InitializeComponent();
         }
+
+        private void Pesquisar(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NovaEntrada(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RegistrarSaida(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

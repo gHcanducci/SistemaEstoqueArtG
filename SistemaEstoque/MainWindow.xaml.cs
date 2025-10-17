@@ -20,4 +20,14 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+    private void GerenciarResponsaveis(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void VisualizarEstoque(object sender, RoutedEventArgs e)
+    {
+
+    }
 }

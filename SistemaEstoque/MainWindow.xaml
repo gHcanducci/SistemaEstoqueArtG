@@ -5,25 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SistemaEstoque"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#FFECECEC">
-        <GroupBox Header="Relatórios&#xD;&#xA;" Margin="590,44,0,0"/>
-        <Rectangle HorizontalAlignment="Center" Height="45" Margin="0,-1,0,0" Stroke="Black" VerticalAlignment="Top" Width="800" Fill="#FF011945"/>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="127,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="451" UseLayoutRounding="False"/>
-        <Label Content="Pesquisa Rápida" HorizontalAlignment="Left" Height="25" Margin="10,56,0,0" VerticalAlignment="Top" Width="112" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <GroupBox HorizontalAlignment="Left" Height="129" Header="Métodos&#xD;&#xA;" Margin="0,305,0,0" VerticalAlignment="Top" Width="590"/>
-        <GroupBox HorizontalAlignment="Left" Height="204" Header="Pré-Visualização&#xD;&#xA;" Margin="0,101,0,0" VerticalAlignment="Top" Width="590"/>
-        <Image  HorizontalAlignment="Left" Height="42" Margin="20,0,0,0" VerticalAlignment="Top" Width="72" Source="/LogoArtG.jpeg"/>
-        <!--
-        <Label Content="Nome" HorizontalAlignment="Left" Height="27" Margin="27,32,0,0" VerticalAlignment="Top" Width="86" FontWeight="Bold"/>
-        <Label Content="Email" HorizontalAlignment="Left" Height="27" Margin="27,87,0,0" VerticalAlignment="Top" Width="86" FontWeight="Bold"/>
-        <Label Content="Senha" HorizontalAlignment="Left" Height="27" Margin="27,149,0,0" VerticalAlignment="Top" Width="86" FontWeight="Bold" Background="{x:Null}"/>
-        <TextBox HorizontalAlignment="Left" Height="28" Margin="27,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="511" FontWeight="Light" FontStyle="Oblique" Background="White"/>
-        <TextBox HorizontalAlignment="Left" Height="28" Margin="27,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="511" FontWeight="Light" FontStyle="Oblique" />
-        <TextBox HorizontalAlignment="Left" Height="28" Margin="27,170,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="511" FontWeight="Light" FontStyle="Oblique" Background="White"/>
-        <Button Content="Button" HorizontalAlignment="Left" Height="24" Margin="32,252,0,0" VerticalAlignment="Top" Width="110" Background="#FF2936FF" Foreground="Black"/>
-        -->
+        Title="MainWindow" Height="450" Width="800" Background="#FF011945">
 
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="67*"/>
+            <ColumnDefinition Width="646*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <!-- Título -->
+        <TextBlock
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Foreground="#FFADC1E4"
+                   Margin="0,-2,0,12" Grid.ColumnSpan="3"><Run Language="pt-br" Text="&#x9;"/><Run Text=" Sistema de Gerenciamento de Estoque"/></TextBlock>
+
+        <!-- Painel principal -->
+        <Grid Grid.ColumnSpan="3" Margin="0,39,0,0" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Relatório semanal -->
+            <Border Background="White" CornerRadius="10" Padding="15" Margin="5" Grid.Column="0">
+                <StackPanel>
+                    <TextBlock Text="📊 Relatório Semanal de Necessidades" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" Foreground="#FF2D2D2D"/>
+                    <DataGrid x:Name="dgRelatorioSemanal" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Produto" Binding="{Binding Nome}" Width="*"/>
+                            <DataGridTextColumn Header="Quantidade Atual" Binding="{Binding QuantidadeAtual}" Width="Auto"/>
+                            <DataGridTextColumn Header="Necessário" Binding="{Binding QuantidadeNecessaria}" Width="Auto"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="Auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+
+            <!-- Painel lateral -->
+            <Border Grid.Column="1" Margin="5" Background="White" CornerRadius="10" Padding="15">
+                <StackPanel VerticalAlignment="Stretch">
+                    <TextBlock Text="🔧 Ações Rápidas" FontSize="16" FontWeight="Bold" Margin="0,0,0,10" Foreground="#FF2D2D2D"/>
+
+                    <Button Content="👤 Gerenciar Responsáveis" Margin="0,5" Height="40" Background="#3498DB" Foreground="White" BorderThickness="0" Click="AbrirResponsaveis_Click"/>
+                    <Button Content="📦 Visualizar Estoque" Margin="0,5" Height="40" Background="#2ECC71" Foreground="White" BorderThickness="0" Click="AbrirEstoque_Click"/>
+
+                    <Separator Margin="0,15"/>
+
+                    <TextBlock Text="📈 Pré-visualização de Estoque" FontWeight="Bold" Margin="0,0,0,10" Foreground="#FF2D2D2D"/>
+                    <ListView x:Name="lvPreviewEstoque" Height="127" BorderThickness="0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Produto" DisplayMemberBinding="{Binding Nome}" Width="150"/>
+                                <GridViewColumn Header="Qtd" DisplayMemberBinding="{Binding Quantidade}" Width="60"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Image HorizontalAlignment="Left" Height="61" Margin="-18,-18,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2" Source="/LogoArtG.jpeg" Grid.RowSpan="2"/>
     </Grid>
 </Window>

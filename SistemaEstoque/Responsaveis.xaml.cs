@@ -18,11 +18,16 @@ namespace SistemaEstoque
     /// <summary>
     /// Interação lógica para Responsáveis.xam
     /// </summary>
-    public partial class Responsáveis : Page
+    public partial class Responsaveis : Page
     {
-        public Responsáveis()
+        public Responsaveis()
         {
             InitializeComponent();
+        }
+
+        private void SalvarResponsavel(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
