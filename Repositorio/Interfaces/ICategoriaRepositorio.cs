@@ -10,5 +10,8 @@ namespace Repositório.Interfaces
     public interface ICategoriaRepositorio
     {
         void adicionar(Categoria categoria);
+        void deletar(Categoria categoria);
+        void alterar(Categoria categoria);
+        void consultar(Categoria categoria);
     }
 }

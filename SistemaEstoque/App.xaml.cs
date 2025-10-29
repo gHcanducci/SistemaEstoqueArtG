@@ -9,5 +9,6 @@ namespace SistemaEstoque;
 /// </summary>
 public partial class App : Application
 {
+
 }
 

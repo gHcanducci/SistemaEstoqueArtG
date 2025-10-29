@@ -18,9 +18,9 @@ namespace SistemaEstoque
     /// <summary>
     /// Interação lógica para Estoque.xam
     /// </summary>
-    public partial class Estoque : Page
+    public partial class EstoqueWindow : Window
     {
-        public Estoque()
+        public EstoqueWindow()
         {
             InitializeComponent();
         }

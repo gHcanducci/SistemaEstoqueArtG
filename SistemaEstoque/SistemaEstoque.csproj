@@ -15,16 +15,16 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="5.3.0" />
     <PackageReference Include="MaterialDesignThemes.Wpf" Version="1.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Repositorio\Repositorio.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -20,9 +20,9 @@ namespace Repositório.Classes
         }
 
         public void deletar(Produto produto)
-        {
-            contexto.Produtos.Remove(produto);
-            contexto.SaveChanges();
+        { 
+                contexto.Produtos.Remove(produto);
+                contexto.SaveChanges();
         }
         public void alterar(Produto produto)
         {
