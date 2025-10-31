@@ -51,7 +51,7 @@ namespace InfraEstrutura.Migrations
                     b.Property<DateTime>("DataEntrada")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FornecedorId")
+                    b.Property<int?>("FornecedorId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProdutoId")
@@ -60,7 +60,7 @@ namespace InfraEstrutura.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.Property<int>("ResponsavelId")
+                    b.Property<int?>("ResponsavelId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -116,10 +116,7 @@ namespace InfraEstrutura.Migrations
                     b.Property<int?>("CategoriaId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("EntradaProdutoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FornecedorId")
+                    b.Property<int?>("FornecedorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -133,9 +130,6 @@ namespace InfraEstrutura.Migrations
                     b.Property<byte>("Reposicao")
                         .HasColumnType("tinyint");
 
-                    b.Property<int>("SaidaProdutoId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Valor")
                         .HasPrecision(8, 2)
                         .HasColumnType("decimal(8,2)");
@@ -146,11 +140,7 @@ namespace InfraEstrutura.Migrations
 
                     b.HasIndex("CategoriaId1");
 
-                    b.HasIndex("EntradaProdutoId");
-
                     b.HasIndex("FornecedorId");
-
-                    b.HasIndex("SaidaProdutoId");
 
                     b.ToTable("Produtos", (string)null);
                 });
@@ -190,7 +180,7 @@ namespace InfraEstrutura.Migrations
                         {
                             Id = 1,
                             NivelAcesso = "admin",
-                            Nome = "Administrador",
+                            Nome = "ADM",
                             SenhaHash = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=",
                             Setor = "Administracao"
                         });
@@ -213,7 +203,7 @@ namespace InfraEstrutura.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.Property<int>("ResponsavelId")
+                    b.Property<int?>("ResponsavelId")
                         .HasColumnType("int");
 
                     b.Property<string>("TipoSaida")
@@ -235,8 +225,7 @@ namespace InfraEstrutura.Migrations
                     b.HasOne("InfraEstrutura.Entidades.Fornecedor", "Fornecedor")
                         .WithMany("EntradasProdutos")
                         .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("InfraEstrutura.Entidades.Produto", "Produto")
                         .WithMany("Entradas")
@@ -247,8 +236,7 @@ namespace InfraEstrutura.Migrations
                     b.HasOne("InfraEstrutura.Entidades.Responsavel", "Responsavel")
                         .WithMany()
                         .HasForeignKey("ResponsavelId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Fornecedor");
 
@@ -269,31 +257,14 @@ namespace InfraEstrutura.Migrations
                         .WithMany("Produtos")
                         .HasForeignKey("CategoriaId1");
 
-                    b.HasOne("InfraEstrutura.Entidades.EntradaProduto", "EntradaProduto")
-                        .WithMany("Produtos")
-                        .HasForeignKey("EntradaProdutoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("InfraEstrutura.Entidades.Fornecedor", "Fornecedor")
                         .WithMany("Produtos")
                         .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("InfraEstrutura.Entidades.SaidaProduto", "SaidaProduto")
-                        .WithMany("Produtos")
-                        .HasForeignKey("SaidaProdutoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Categoria");
 
-                    b.Navigation("EntradaProduto");
-
                     b.Navigation("Fornecedor");
-
-                    b.Navigation("SaidaProduto");
                 });
 
             modelBuilder.Entity("InfraEstrutura.Entidades.SaidaProduto", b =>
@@ -307,8 +278,7 @@ namespace InfraEstrutura.Migrations
                     b.HasOne("InfraEstrutura.Entidades.Responsavel", "Responsavel")
                         .WithMany()
                         .HasForeignKey("ResponsavelId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Produto");
 
@@ -316,11 +286,6 @@ namespace InfraEstrutura.Migrations
                 });
 
             modelBuilder.Entity("InfraEstrutura.Entidades.Categoria", b =>
-                {
-                    b.Navigation("Produtos");
-                });
-
-            modelBuilder.Entity("InfraEstrutura.Entidades.EntradaProduto", b =>
                 {
                     b.Navigation("Produtos");
                 });
@@ -337,11 +302,6 @@ namespace InfraEstrutura.Migrations
                     b.Navigation("Entradas");
 
                     b.Navigation("Saidas");
-                });
-
-            modelBuilder.Entity("InfraEstrutura.Entidades.SaidaProduto", b =>
-                {
-                    b.Navigation("Produtos");
                 });
 #pragma warning restore 612, 618
         }

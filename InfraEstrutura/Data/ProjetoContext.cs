@@ -43,7 +43,7 @@ namespace InfraEstrutura.Data
                 new Responsavel
                 {
                     Id = 1, // Definimos o ID manualmente para o primeiro usuário
-                    Nome = "Administrador",
+                    Nome = "ADM",
                     Setor = "Administracao",
                     SenhaHash = Convert.ToBase64String(hashedPassword), // Guardamos o hash como string
                     NivelAcesso = "admin"
@@ -80,18 +80,6 @@ namespace InfraEstrutura.Data
                 entidade.HasOne(p => p.Fornecedor)
                         .WithMany(f => f.Produtos)
                         .HasForeignKey(p => p.FornecedorId)
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                // EntradaProduto
-                entidade.HasOne(p => p.EntradaProduto)
-                        .WithMany(e => e.Produtos)
-                        .HasForeignKey(p => p.EntradaProdutoId)
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                // SaidaProduto
-                entidade.HasOne(p => p.SaidaProduto)
-                        .WithMany(s => s.Produtos)
-                        .HasForeignKey(p => p.SaidaProdutoId)
                         .OnDelete(DeleteBehavior.Restrict);
             });
 

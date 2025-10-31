@@ -10,15 +10,11 @@ namespace InfraEstrutura.Entidades
             public decimal Valor { get; set; }
             public int CategoriaId { get; set; }
             public byte Reposicao { get; set; }
-            public int FornecedorId { get; set; }
-            public int EntradaProdutoId { get; set; }
-            public int SaidaProdutoId { get; set; }
+            public int? FornecedorId { get; set; }
 
             // Navegação
             public Categoria? Categoria { get; set; }
             public Fornecedor? Fornecedor { get; set; }
-            public EntradaProduto? EntradaProduto { get; set; }
-            public SaidaProduto? SaidaProduto { get; set; }
 
             // Coleções de entradas e saídas relacionadas
             public ICollection<EntradaProduto>? Entradas { get; set; }

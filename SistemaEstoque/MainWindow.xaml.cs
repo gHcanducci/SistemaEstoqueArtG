@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using InfraEstrutura.Entidades;
+using Repositório.Classes;
+using System.Text;
+using InfraEstrutura.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,9 +16,15 @@ namespace SistemaEstoque
 {
     public partial class MainWindow : Window
     {
+
+        private readonly ProdutoRepositorio _produtoRepositorio;
         public MainWindow()
         {
             InitializeComponent();
+
+            // Cria o contexto do banco e o repositório
+            var contexto = new ProjetoContext();
+            _produtoRepositorio = new ProdutoRepositorio(contexto);
 
             // Se quiser, pode carregar o relatório semanal e pré-visualização do estoque aqui
             CarregarRelatorioSemanal();
@@ -28,9 +37,7 @@ namespace SistemaEstoque
             try
             {
                 ResponsaveisWindow janelaResponsaveis = new ResponsaveisWindow();
-                {
-                    Owner = this; // MainWindow como dona da janela
-                };
+                janelaResponsaveis.Owner = this; // Define a MainWindow como dona
                 janelaResponsaveis.ShowDialog(); // Modal
             }
             catch (System.Exception ex)
@@ -39,15 +46,12 @@ namespace SistemaEstoque
             }
         }
 
-        // Botão: Visualizar Estoque
         private void AbrirEstoque_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 EstoqueWindow janelaEstoque = new EstoqueWindow();
-                {
-                    Owner = this;
-                };
+                janelaEstoque.Owner = this; // Define a MainWindow como dona
                 janelaEstoque.ShowDialog(); // Modal
             }
             catch (System.Exception ex)
@@ -56,34 +60,46 @@ namespace SistemaEstoque
             }
         }
 
-        // Exemplo de método para carregar o relatório semanal (pode ser do banco de dados)
         private void CarregarRelatorioSemanal()
         {
-            // Aqui você pode substituir por uma consulta real no banco
-            var listaExemplo = new[]
+            try
             {
-                new { Nome = "Produto A", QuantidadeAtual = 50, QuantidadeNecessaria = 100, Status = "Comprar" },
-                new { Nome = "Produto B", QuantidadeAtual = 200, QuantidadeNecessaria = 150, Status = "Estável" }
-            };
+                var produtosReposicao = _produtoRepositorio.ObterProdutosParaReposicao()
+                    .Select(p => new
+                    {
+                        Nome = p.Nome,
+                        QuantidadeAtual = p.Quantidade,
+                        QuantidadeNecessaria = p.Quantidade + 50, // Exemplo
+                        Status = "Reposição Necessária"
+                    })
+                    .ToList();
 
-            dgRelatorioSemanal.ItemsSource = listaExemplo;
-            // COM BANCO DE DADOS ALGO COMO:
-            //dgRelatorioSemanal.ItemsSource = conexao.ExecutarConsulta("SELECT * FROM Produtos");
-
+                dgRelatorioSemanal.ItemsSource = produtosReposicao;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao carregar relatório: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        // Exemplo de método para carregar pré-visualização do estoque
         private void CarregarPreviewEstoque()
         {
-            var previewExemplo = new[]
+            try
             {
-                new { Nome = "Produto A", Quantidade = 50 },
-                new { Nome = "Produto B", Quantidade = 200 }
-            };
+                var produtos = _produtoRepositorio.ObterTodos()
+                    .Select(p => new
+                    {
+                        p.Nome,
+                        p.Quantidade
+                    })
+                    .ToList();
 
-            lvPreviewEstoque.ItemsSource = previewExemplo;
-            // COM BANCO DE DADOS ALGO COMO:
-            //Fará um SELECT Nome, Quantidade FROM Produtos
+                lvPreviewEstoque.ItemsSource = produtos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao carregar pré-visualização: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

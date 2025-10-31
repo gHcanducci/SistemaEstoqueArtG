@@ -23,6 +23,8 @@
                     <Button Content="Pesquisar" Width="100" Background="#2980B9" Foreground="White" BorderThickness="0" Click="Pesquisar"/>
                     <Button Content="Nova Entrada" Width="120" Margin="10,0,0,0" Background="#27AE60" Foreground="White" BorderThickness="0" Click="NovaEntrada"/>
                     <Button Content="Registrar Saída" Width="120" Margin="10,0,0,0" Background="#E67E22" Foreground="White" BorderThickness="0" Click="RegistrarSaida"/>
+                    <Button Content="Cadastrar Produto" Width="120" Margin="10,0,0,0" Background="#FFDC0000" Foreground="White" BorderThickness="0" Click="CadastrarProduto"/>
+                    <Button Content="Cadastrar Categoria" Width="120" Margin="10,0,0,0" Background="#FF9400FF" Foreground="White" BorderThickness="0" Click="CadastrarCategoria"/>
                 </StackPanel>
 
                 <DataGrid x:Name="dgEstoque" AutoGenerateColumns="False" CanUserAddRows="False" HeadersVisibility="Column" >

@@ -13,6 +13,30 @@ namespace Repositório.Classes
             this.contexto = contexto;
         }
 
+        public IEnumerable<Produto> ObterPorNome(string nome)
+        {
+            return contexto.Produtos
+                .Where(p => p.Nome.Contains(nome))
+                .ToList();
+        }
+
+        public IEnumerable<Produto> ObterProdutosParaReposicao()
+        {
+            // Filtra produtos com Reposicao == 1
+            return contexto.Produtos
+                .Where(p => p.Reposicao == 1)
+                .AsNoTracking()
+                .ToList();
+        }
+
+        public IEnumerable<Produto> ObterTodos()
+        {
+            return contexto.Produtos
+                .AsNoTracking()
+                .ToList();
+        }
+
+
         public void adicionar(Produto produto)
         {
             contexto.Produtos.Add(produto);
@@ -27,7 +51,6 @@ namespace Repositório.Classes
         public void alterar(Produto produto)
         {
             contexto.Produtos.Update(produto);
-            // --------- PERGUNTAR A PROFESSORA
             contexto.SaveChanges();
         }
         public void consultar(Produto produto)
