@@ -42,10 +42,7 @@
                 <ComboBox x:Name="cbCategoria" Height="20" Margin="0,5,0,5" DisplayMemberPath="Descricao" SelectedValuePath="Id"/>
 
                 <TextBlock Text="Fornecedor" Foreground="#011945" FontWeight="Bold"/>
-                <ComboBox x:Name="cbFornecedor" Height="20" Margin="0,5,0,5" DisplayMemberPath="Nome" SelectedValuePath="Id"/>
-
-                <TextBlock Text="Nível de Reposição" Foreground="#011945" FontWeight="Bold"/>
-                <TextBox x:Name="txtReposicao" Height="20" Margin="0,5,0,15"/>
+                <TextBox x:Name="txtFornecedor" Height="20" Margin="0,5,0,15"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Content="Salvar" Width="100" Height="25" Background="#27AE60" Foreground="White" BorderThickness="0" Margin="0,0,10,0" Click="Salvar_Click"/>

@@ -13,10 +13,20 @@ namespace Repositório.Classes
             this.contexto = contexto;
         }
 
+        public IEnumerable<Produto> ObterTodos()
+        {
+            return contexto.Produtos
+                .Include(p => p.Categoria)
+                .AsNoTracking()
+                .ToList();
+        }
+
         public IEnumerable<Produto> ObterPorNome(string nome)
         {
             return contexto.Produtos
+                .Include(p => p.Categoria)
                 .Where(p => p.Nome.Contains(nome))
+                .AsNoTracking()
                 .ToList();
         }
 
@@ -25,13 +35,6 @@ namespace Repositório.Classes
             // Filtra produtos com Reposicao == 1
             return contexto.Produtos
                 .Where(p => p.Reposicao == 1)
-                .AsNoTracking()
-                .ToList();
-        }
-
-        public IEnumerable<Produto> ObterTodos()
-        {
-            return contexto.Produtos
                 .AsNoTracking()
                 .ToList();
         }

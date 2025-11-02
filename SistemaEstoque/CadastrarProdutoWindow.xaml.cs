@@ -26,7 +26,6 @@ namespace SistemaEstoque
             try
             {
                 cbCategoria.ItemsSource = _contexto.Categorias.ToList();
-                cbFornecedor.ItemsSource = _contexto.Fornecedores.ToList();
             }
             catch (Exception ex)
             {
@@ -56,23 +55,14 @@ namespace SistemaEstoque
                     return;
                 }
 
-                if (!byte.TryParse(txtReposicao.Text, out byte reposicao) || reposicao < 0)
-                {
-                    MessageBox.Show("Nível de reposição inválido.", "Erro", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
 
                 if (cbCategoria.SelectedValue == null)
                 {
                     MessageBox.Show("Selecione uma categoria.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
-
-                int? fornecedorId = null;
-                if (cbFornecedor.SelectedValue != null)
-                {
-                    fornecedorId = (int)cbFornecedor.SelectedValue;
-                }
+                // Define a reposição automaticamente
+                byte reposicao = quantidade < 1 ? (byte)1 : (byte)0;
 
                 var novoProduto = new Produto
                 {
@@ -81,7 +71,7 @@ namespace SistemaEstoque
                     Quantidade = quantidade,
                     Reposicao = reposicao,
                     CategoriaId = (int)cbCategoria.SelectedValue,
-                    FornecedorId = fornecedorId
+                    Fornecedor = txtFornecedor.Text?.Trim() ?? string.Empty
                 };
 
                 _produtoRepositorio.adicionar(novoProduto);

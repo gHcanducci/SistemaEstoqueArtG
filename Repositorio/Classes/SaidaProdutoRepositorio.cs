@@ -1,5 +1,6 @@
 ﻿using InfraEstrutura.Data;
 using InfraEstrutura.Entidades;
+using Microsoft.EntityFrameworkCore;
 using Repositório.Interfaces;
 
 namespace Repositorio.Classes
@@ -10,6 +11,17 @@ namespace Repositorio.Classes
         public SaidaProdutoRepositorio(ProjetoContext contexto)
         {
             this.contexto = contexto;
+        }
+
+
+        public IEnumerable<SaidaProduto> ObterPorProduto(int produtoId)
+        {
+            return contexto.SaidaProduto
+                .Include(s => s.Produto)
+                .Include(s => s.Responsavel)
+                .Where(s => s.ProdutoId == produtoId)
+                .OrderByDescending(s => s.DataSaida)
+                .ToList();
         }
 
         public void adicionar(SaidaProduto saidaProduto)

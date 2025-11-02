@@ -20,7 +20,6 @@ namespace InfraEstrutura.Data
         public DbSet<Responsavel> Responsaveis { get; set; }
         public DbSet<EntradaProduto> EntradaProduto { get; set; }
         public DbSet<SaidaProduto> SaidaProduto { get; set; }
-        public DbSet<Fornecedor> Fornecedores { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -75,12 +74,8 @@ namespace InfraEstrutura.Data
                         .HasForeignKey(p => p.CategoriaId)
                         .OnDelete(DeleteBehavior.Restrict);
 
-                // Fornecedor
+                entidade.Property(p => p.Fornecedor).HasMaxLength(150).IsRequired(false); // Opcional, você decide se obrigatória ou não
 
-                entidade.HasOne(p => p.Fornecedor)
-                        .WithMany(f => f.Produtos)
-                        .HasForeignKey(p => p.FornecedorId)
-                        .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Responsavel>(entidade =>
@@ -100,12 +95,8 @@ namespace InfraEstrutura.Data
                 entidade.HasKey(p => p.Id);
                 entidade.Property(p => p.DataEntrada).IsRequired();
                 entidade.Property(p => p.Quantidade).IsRequired();
+                entidade.Property(e => e.Fornecedor).HasMaxLength(150).IsRequired(false);
 
-                // Entrada -> Fornecedor
-                entidade.HasOne(e => e.Fornecedor)
-                        .WithMany(f => f.EntradasProdutos)
-                        .HasForeignKey(e => e.FornecedorId)
-                        .OnDelete(DeleteBehavior.Restrict);
 
                 // Entrada -> Produto
                 entidade.HasOne(e => e.Produto)
@@ -140,14 +131,6 @@ namespace InfraEstrutura.Data
                         .OnDelete(DeleteBehavior.Restrict);
             });
 
-            modelBuilder.Entity<Fornecedor>(entidade => {
-                entidade.ToTable("Fornecedores");//nome da table
-                entidade.HasKey(p => p.Id);//chave primaria
-                                           //qtde maxima de caracteres e preenchimento obrigatorio
-                entidade.Property(p => p.Nome).HasMaxLength(150).IsRequired();
-                entidade.Property(p => p.Telefone).HasMaxLength(150).IsRequired();
-                entidade.Property(p => p.Email).HasMaxLength(150).IsRequired();
-            });
 
         }
 

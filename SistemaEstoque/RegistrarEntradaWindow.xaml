@@ -1,0 +1,90 @@
+﻿<Window x:Class="SistemaEstoque.RegistrarEntradaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Registrar Entrada de Produto"
+        Height="500" Width="650"
+        WindowStartupLocation="CenterScreen"
+        Background="#FF011945">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Cabeçalho -->
+        <Grid Grid.Row="0">
+            <Image HorizontalAlignment="Left"
+                   Height="59"
+                   Margin="-20,-20,0,0"
+                   VerticalAlignment="Top"
+                   Width="105"
+                   Source="/LogoArtG.jpeg"/>
+            <TextBlock Text="Registrar Entrada de Produto"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#FFABC2E4"
+                       VerticalAlignment="Top"
+                       Margin="96,-5,24,0"/>
+        </Grid>
+
+        <!-- Conteúdo -->
+        <Border Grid.Row="1"
+                Background="White"
+                CornerRadius="10"
+                Padding="20">
+            <StackPanel Margin="20"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Width="500">
+
+                <!-- PRODUTO -->
+                <TextBlock Text="Produto" Foreground="#011945" FontWeight="Bold"/>
+                <ComboBox x:Name="cmbProduto"
+                      Height="25"
+                      Margin="0,5,0,5"
+                      IsEditable="True"
+                      IsTextSearchEnabled="True"
+                      TextSearch.TextPath="Nome"
+                      DisplayMemberPath="Nome"
+                      SelectedValuePath="Id"/>      
+
+                <!-- FORNECEDOR -->
+                <TextBlock Text="Fornecedor" Foreground="#011945" FontWeight="Bold"/>
+                <TextBox x:Name="txtFornecedor" Height="25" Margin="0,5,0,5" />
+
+                <!-- Quantidade -->
+                <TextBlock Text="Quantidade de Entrada"
+                           Foreground="#011945"
+                           FontWeight="Bold"/>
+                <TextBox x:Name="txtQuantidade"
+                         Height="25"
+                         Margin="0,5,0,20"/>
+
+                <!-- Botões -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Content="Registrar"
+                            Width="100"
+                            Height="25"
+                            Background="#27AE60"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Margin="0,0,10,0"
+                            Click="RegistrarEntrada_Click"/>
+                    <Button Content="Cancelar"
+                            Width="100"
+                            Height="25"
+                            Background="#DC0000"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Click="Cancelar_Click"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

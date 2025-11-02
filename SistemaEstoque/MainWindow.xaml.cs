@@ -39,6 +39,9 @@ namespace SistemaEstoque
                 ResponsaveisWindow janelaResponsaveis = new ResponsaveisWindow();
                 janelaResponsaveis.Owner = this; // Define a MainWindow como dona
                 janelaResponsaveis.ShowDialog(); // Modal
+
+                CarregarRelatorioSemanal();
+                CarregarPreviewEstoque();
             }
             catch (System.Exception ex)
             {
@@ -53,10 +56,31 @@ namespace SistemaEstoque
                 EstoqueWindow janelaEstoque = new EstoqueWindow();
                 janelaEstoque.Owner = this; // Define a MainWindow como dona
                 janelaEstoque.ShowDialog(); // Modal
+
+                CarregarRelatorioSemanal();
+                CarregarPreviewEstoque();
             }
             catch (System.Exception ex)
             {
                 MessageBox.Show($"Erro ao abrir a janela de estoque:\n{ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AbrirGerenciarEntradasSaidas_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                GerenciarEntradasSaidasWindow janela = new GerenciarEntradasSaidasWindow();
+                janela.Owner = this;
+                janela.ShowDialog();
+
+                // Atualiza o relatório e preview após o fechamento da janela
+                CarregarRelatorioSemanal();
+                CarregarPreviewEstoque();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao abrir a janela de Gerenciamento de Entradas/Saídas:\n{ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -69,8 +93,9 @@ namespace SistemaEstoque
                     {
                         Nome = p.Nome,
                         QuantidadeAtual = p.Quantidade,
-                        QuantidadeNecessaria = p.Quantidade + 50, // Exemplo
-                        Status = "Reposição Necessária"
+                        Fornecedor = p.Fornecedor,
+                        Reposicao = p.Reposicao == 1 ? "Sim" : "Não"
+
                     })
                     .ToList();
 

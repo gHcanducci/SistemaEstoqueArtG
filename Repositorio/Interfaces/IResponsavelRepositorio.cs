@@ -1,4 +1,5 @@
 ﻿using InfraEstrutura.Entidades;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,10 @@ namespace Repositorio.Interfaces
 {
     public interface IResponsavelRepositorio
     {
-        void cadastrar(Responsavel responsavel);
+        public void Adicionar(Responsavel responsavel);
+
+        public void Atualizar(Responsavel responsavel);
+
+        public void Remover(Responsavel responsavel);
     }
 }

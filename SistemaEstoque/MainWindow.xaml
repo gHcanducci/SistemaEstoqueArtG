@@ -40,8 +40,8 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Produto" Binding="{Binding Nome}" Width="*"/>
                             <DataGridTextColumn Header="Quantidade Atual" Binding="{Binding QuantidadeAtual}" Width="Auto"/>
-                            <DataGridTextColumn Header="Necessário" Binding="{Binding QuantidadeNecessaria}" Width="Auto"/>
-                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="Auto"/>
+                            <DataGridTextColumn Header="Fornecedor" Binding="{Binding Fornecedor}" Width="Auto"/>
+                            <DataGridTextColumn Header="Reposição" Binding="{Binding Reposicao}" Width="Auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -54,6 +54,7 @@
 
                     <Button Content="👤 Gerenciar Responsáveis" Margin="0,5" Height="40" Background="#3498DB" Foreground="White" BorderThickness="0" Click="AbrirResponsaveis_Click"/>
                     <Button Content="📦 Visualizar Estoque" Margin="0,5" Height="40" Background="#2ECC71" Foreground="White" BorderThickness="0" Click="AbrirEstoque_Click"/>
+                    <Button Content="📥 Gerenciar Entradas/Saídas" Margin="0,5" Height="40" Background="#F1C40F" Foreground="White" BorderThickness="0" Click="AbrirGerenciarEntradasSaidas_Click"/>
 
                     <Separator Margin="0,15"/>
 

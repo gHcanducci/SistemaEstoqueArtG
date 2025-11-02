@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfraEstrutura.Migrations
 {
     [DbContext(typeof(ProjetoContext))]
-    [Migration("20251031011049_AjusteCamposOpcionais")]
-    partial class AjusteCamposOpcionais
+    [Migration("20251102005830_CriacaoInicial")]
+    partial class CriacaoInicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,8 +54,9 @@ namespace InfraEstrutura.Migrations
                     b.Property<DateTime>("DataEntrada")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("FornecedorId")
-                        .HasColumnType("int");
+                    b.Property<string>("Fornecedor")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
@@ -68,41 +69,11 @@ namespace InfraEstrutura.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FornecedorId");
-
                     b.HasIndex("ProdutoId");
 
                     b.HasIndex("ResponsavelId");
 
                     b.ToTable("EntradasProdutos", (string)null);
-                });
-
-            modelBuilder.Entity("InfraEstrutura.Entidades.Fornecedor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Fornecedores", (string)null);
                 });
 
             modelBuilder.Entity("InfraEstrutura.Entidades.Produto", b =>
@@ -119,11 +90,9 @@ namespace InfraEstrutura.Migrations
                     b.Property<int?>("CategoriaId1")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EntradaProdutoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FornecedorId")
-                        .HasColumnType("int");
+                    b.Property<string>("Fornecedor")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -136,9 +105,6 @@ namespace InfraEstrutura.Migrations
                     b.Property<byte>("Reposicao")
                         .HasColumnType("tinyint");
 
-                    b.Property<int?>("SaidaProdutoId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Valor")
                         .HasPrecision(8, 2)
                         .HasColumnType("decimal(8,2)");
@@ -148,12 +114,6 @@ namespace InfraEstrutura.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.HasIndex("CategoriaId1");
-
-                    b.HasIndex("EntradaProdutoId");
-
-                    b.HasIndex("FornecedorId");
-
-                    b.HasIndex("SaidaProdutoId");
 
                     b.ToTable("Produtos", (string)null);
                 });
@@ -235,11 +195,6 @@ namespace InfraEstrutura.Migrations
 
             modelBuilder.Entity("InfraEstrutura.Entidades.EntradaProduto", b =>
                 {
-                    b.HasOne("InfraEstrutura.Entidades.Fornecedor", "Fornecedor")
-                        .WithMany("EntradasProdutos")
-                        .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("InfraEstrutura.Entidades.Produto", "Produto")
                         .WithMany("Entradas")
                         .HasForeignKey("ProdutoId")
@@ -250,8 +205,6 @@ namespace InfraEstrutura.Migrations
                         .WithMany()
                         .HasForeignKey("ResponsavelId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Fornecedor");
 
                     b.Navigation("Produto");
 
@@ -270,28 +223,7 @@ namespace InfraEstrutura.Migrations
                         .WithMany("Produtos")
                         .HasForeignKey("CategoriaId1");
 
-                    b.HasOne("InfraEstrutura.Entidades.EntradaProduto", "EntradaProduto")
-                        .WithMany("Produtos")
-                        .HasForeignKey("EntradaProdutoId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("InfraEstrutura.Entidades.Fornecedor", "Fornecedor")
-                        .WithMany("Produtos")
-                        .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("InfraEstrutura.Entidades.SaidaProduto", "SaidaProduto")
-                        .WithMany("Produtos")
-                        .HasForeignKey("SaidaProdutoId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("Categoria");
-
-                    b.Navigation("EntradaProduto");
-
-                    b.Navigation("Fornecedor");
-
-                    b.Navigation("SaidaProduto");
                 });
 
             modelBuilder.Entity("InfraEstrutura.Entidades.SaidaProduto", b =>
@@ -317,28 +249,11 @@ namespace InfraEstrutura.Migrations
                     b.Navigation("Produtos");
                 });
 
-            modelBuilder.Entity("InfraEstrutura.Entidades.EntradaProduto", b =>
-                {
-                    b.Navigation("Produtos");
-                });
-
-            modelBuilder.Entity("InfraEstrutura.Entidades.Fornecedor", b =>
-                {
-                    b.Navigation("EntradasProdutos");
-
-                    b.Navigation("Produtos");
-                });
-
             modelBuilder.Entity("InfraEstrutura.Entidades.Produto", b =>
                 {
                     b.Navigation("Entradas");
 
                     b.Navigation("Saidas");
-                });
-
-            modelBuilder.Entity("InfraEstrutura.Entidades.SaidaProduto", b =>
-                {
-                    b.Navigation("Produtos");
                 });
 #pragma warning restore 612, 618
         }

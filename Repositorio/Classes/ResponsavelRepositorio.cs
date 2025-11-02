@@ -7,6 +7,7 @@ using Repositório.Interfaces;
 using InfraEstrutura.Data;
 using InfraEstrutura.Entidades;
 using Repositorio.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Repositorio.Classes
@@ -19,18 +20,19 @@ namespace Repositorio.Classes
             this.contexto = contexto;
         }
 
-        public void cadastrar(Responsavel responsavel)
+        public bool ExisteVinculos(int responsavelId)
         {
-            contexto.Responsaveis.Add(responsavel);
-            contexto.SaveChanges();
-            
+            return contexto.EntradaProduto.Any(e => e.ResponsavelId == responsavelId) ||
+                   contexto.SaidaProduto.Any(s => s.ResponsavelId == responsavelId);
         }
+        public IEnumerable<Responsavel> ObterTodos() => contexto.Responsaveis.ToList();
 
-        public void alterar(Responsavel responsavel)
-        {
-            contexto.Responsaveis.Update(responsavel);
-            // --------- PERGUNTAR AO PROFESSOR SOBRE A ESTRUTURA DO UPDATE
-            contexto.SaveChanges();
-        }
+        public void Adicionar(Responsavel responsavel) => contexto.Responsaveis.Add(responsavel);
+
+        public void Atualizar(Responsavel responsavel) => contexto.Responsaveis.Update(responsavel);
+
+        public void Remover(Responsavel responsavel) => contexto.Responsaveis.Remove(responsavel);
+
+        public void Salvar() => contexto.SaveChanges();
     }
 }

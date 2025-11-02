@@ -13,11 +13,12 @@ namespace InfraEstrutura.Entidades
         public int Quantidade { get; set; }
 
         public int ProdutoId { get; set; }
-        public int? FornecedorId { get; set; }
+        public string Fornecedor { get; set; } = string.Empty;
         public int? ResponsavelId { get; set; }
 
         public Produto? Produto { get; set; }
-        public Fornecedor? Fornecedor { get; set; }
         public Responsavel? Responsavel { get; set; }
+
+
     }
 }
